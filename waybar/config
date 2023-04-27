@@ -1,0 +1,66 @@
+{
+    "position": "bottom", 
+    "height": 20,
+    "modules-right": ["tray","pulseaudio","clock"],
+    "modules-center": ["wlr/workspaces"],
+    "modules-left": ["disk", "cpu", "temperature", "memory"],
+    // Modules configuration
+	"clock": {
+		"format": "󰅐 {:%H:%M} ",
+        	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+	},
+	"pulseaudio": {
+		"on-click": "pactl set-sink-mute 45 toggle",
+		"format": "{icon}  {volume}%",
+        	"format-muted": "󰖁 Muted",
+        	"format-icons": {
+            	"headphone": "",
+            	"hands-free": "",
+            	"headset": "",
+            	"phone": "",
+            	"portable": "",
+            	"car": "",
+            	"default": ["", "", ""]
+        },
+    },
+	  "memory": {
+        "interval": 5,
+        "format": " {}%"
+    },
+      "cpu": {
+        "interval": 5,
+        "format": " {usage:2}%"
+    },
+        "temperature": {
+        // "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": ["", "", ""]
+    },
+        "disk": {
+        "interval": 5,
+        "format": "\uf1c0 {percentage_used:2}%",
+        "path": "/"
+    },
+       "tray": {
+        // "icon-size": 16,
+        "spacing": 10
+    },
+        "wlr/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+        "1": "",
+        "2": "",
+        "3": "",
+        "4": "",
+        "5": "",
+        "urgent": "",
+        "active": "",
+        "default": ""
+    },
+        "sort-by-number": true
+    },
+}
