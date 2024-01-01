@@ -10,4 +10,5 @@
 	"$MOD, Q, killactive"
       ];
     };
-}
+  };
+};
