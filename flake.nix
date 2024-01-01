@@ -19,7 +19,7 @@
         # 这样就能直接在子模块中使用 inputs 中的 helix 了
         specialArgs = inputs;
         modules = [
-          ./configuration.nix
+          ./nixos/configuration.nix
         ];
       };
     };
