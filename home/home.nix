@@ -2,6 +2,9 @@
 
 
 {
+  imports = [
+    ./rice
+  ];
   home.username = "dingduck";
   home.homeDirectory = "/home/dingduck";
 
