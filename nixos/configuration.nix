@@ -98,13 +98,7 @@
   users.users.dingduck = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      firefox
-      tree
-      kitty
-      wofi
-      alacritty
-    ];
+    packages = with pkgs; [ ];
   };
 
   # List packages installed in system profile. To search, run:
