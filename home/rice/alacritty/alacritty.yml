@@ -1,0 +1,8 @@
+# 透明度
+opacity:
+  0.3
+
+font:
+  normal:
+    family: "JetBrains Mono"
+    style: "Retina"

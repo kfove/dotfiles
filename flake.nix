@@ -8,15 +8,21 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-        url = "github:nix-community/home-manager";
-        inputs.nixpkgs.follows = "nixpkgs";
-	};
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    # helix editor, use tag 23.10
-    helix.url = "github:helix-editor/helix/23.10";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nur = {
+      url = github:nix-community/NUR;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, rust-overlay, ... }: {
     nixosConfigurations = {
       nixosdk = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -26,11 +32,13 @@
         specialArgs = inputs;
         modules = [
           ./nixos/configuration.nix
-	  home-manager.nixosModules.home-manager
-	  {
+          home-manager.nixosModules.home-manager
+          {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.dingduck = import ./home/home.nix;
+            home-manager.extraSpecialArgs = inputs;
+
           }
         ];
       };

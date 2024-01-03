@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
@@ -14,25 +15,29 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/24e626cf-9a44-420a-b5d9-1992b2b8f747";
+    {
+      device = "/dev/disk/by-uuid/24e626cf-9a44-420a-b5d9-1992b2b8f747";
       fsType = "btrfs";
       options = [ "subvol=root" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/24e626cf-9a44-420a-b5d9-1992b2b8f747";
+    {
+      device = "/dev/disk/by-uuid/24e626cf-9a44-420a-b5d9-1992b2b8f747";
       fsType = "btrfs";
       options = [ "subvol=home" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/24e626cf-9a44-420a-b5d9-1992b2b8f747";
+    {
+      device = "/dev/disk/by-uuid/24e626cf-9a44-420a-b5d9-1992b2b8f747";
       fsType = "btrfs";
       options = [ "subvol=nix" "noatime" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/0059-A66D";
+    {
+      device = "/dev/disk/by-uuid/0059-A66D";
       fsType = "vfat";
     };
 
@@ -48,6 +53,6 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
- 
+
 
 }
