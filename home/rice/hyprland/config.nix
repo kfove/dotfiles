@@ -159,6 +159,14 @@
         "fcitx5 -d"
       ];
 
+      # 窗口规则
+      windowrule = [
+        "float,^(pavucontrol)$"
+        "float,^(blueman-manager)$"
+        "float,^(nm-connection-editor)$"
+        "float,^(thunar)$"
+      ];
+
 
     };
   };

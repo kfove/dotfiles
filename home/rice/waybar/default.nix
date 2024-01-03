@@ -13,7 +13,7 @@ let
 in
 {
   xdg.configFile."waybar/style.css".text = import ./style.nix;
-  xdg.configFile."waybar/clock.sh".source = ./clock.sh;
+  home.packages = with pkgs; [ networkmanagerapplet ];
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;
@@ -30,15 +30,13 @@ in
         margin-right = null;
         exclusive = true;
         modules-left = [
-          "custom/search"
           "hyprland/workspaces"
           "backlight"
           "cpu"
           "memory"
           "battery"
         ];
-        modules-center = [ ];
-        modules-right = [ "custom/weather" "pulseaudio" "network" "tray" "custom/clock" ];
+        modules-right = [ "custom/weather" "pulseaudio" "tray" "clock" ];
         "hyprland/workspaces" = {
           on-click = "activate";
           format = "{icon}";
@@ -149,8 +147,31 @@ in
           format = "󰐥";
         };
         clock = {
-          format-alt = "{:%Y-%m-%d}";
-          tooltip-format = "{:%Y-%m-%d | %H:%M}";
+          format = "{:%H:%M}";
+          tooltip-format = ''
+            <big>{:%Y %B}</big>
+            <tt><small>{calendar}</small></tt>'';
+          calendar = {
+            mode = "year";
+            mode-mon-col = 3;
+            weeks-pos = "right";
+            on-scroll = 1;
+            on-click-right = "mode";
+            format = {
+              months = "<span color='#f5c2e7'><b>{}</b></span>";
+              days = "<span color='#cdd6f4'><b>{}</b></span>";
+              weeks = "<span color='#cba6f7'><b>T{:%U}</b></span>";
+              weekdays = "<span color='#eba0ac'><b>{}</b></span>";
+              today = "<span color='#a6e3a1'><b><u>{}</u></b></span>";
+            };
+            actions = {
+              on-click-right = "mode";
+              on-click-forward = "tz_up";
+              on-click-backward = "tz_down";
+              on-scroll-up = "shift_up";
+              on-scroll-down = "shift_down";
+            };
+          };
         };
         backlight = {
           format = "{icon}  {percent}%";
@@ -165,6 +186,7 @@ in
           interval = 2;
           format = "󰍛 {}%";
           max-length = 10;
+          on-click = "kitty --start-as=fullscreen --title btop sh -c 'btop'";
         };
         battery = {
           states = {
@@ -199,17 +221,9 @@ in
             default = [ "" "" " " ];
           };
         };
-        tray = {
-          icon-size = 21;
-          spacing = 10;
-        };
-        "custom/clock" = {
-          "return-type" = "json";
-          "exec" = "./clock.sh";
-          "format" = "{}";
-          "interval" = 2;
-          "tooltip" = true;
-          "format-icons" = [ "" ];
+        "tray" = {
+          "icon-size" = 17;
+          "spacing" = 10;
         };
       };
     };

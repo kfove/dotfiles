@@ -6,8 +6,8 @@
     ./waybar
     ./alacritty
     ./nixpkgs
-    ./dunst.nix
     ./eww
+    ./mako
   ];
   programs.neovim = {
     enable = true;

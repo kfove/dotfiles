@@ -11,7 +11,7 @@
     };
     cursorTheme = {
       package = pkgs.vimix-cursors;
-      name = "Vimix Cursors";
+      name = "Vimix-cursors";
     };
 
   };
